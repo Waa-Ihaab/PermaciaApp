@@ -62,14 +62,14 @@
 
         <Button
             android:id="@+id/btnGetStarted"
-            android:layout_width="280dp"
+            android:layout_width="331dp"
             android:layout_height="55dp"
-            android:text="Get Started  →"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
             android:background="@drawable/btn_corner"
-            android:backgroundTint="@null"
-            android:fontFamily="@font/poppins_semibold"/>
+            android:fontFamily="@font/poppins_bold"
+            android:text="Get Started"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:backgroundTint="@null" />
     </FrameLayout>
 
 </RelativeLayout>
