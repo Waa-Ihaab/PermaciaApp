@@ -45,4 +45,5 @@
     </string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_create_acc">createAcc</string>
+    <string name="title_activity_creat_acc">creatAcc</string>
 </resources>
