@@ -11,20 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
+        <!-- Page d’accueil après connexion -->
+        <activity
+            android:name=".PageHome"
+            android:exported="true"
+            android:theme="@style/Theme.MyApplication" />
+
+        <!-- Écran de création de compte -->
         <activity
             android:name=".Creatacc"
-            android:exported="false" />
+            android:exported="true" />
+
+        <!-- Page de connexion -->
+        <activity android:name=".Login" />
+
+        <!-- Point d’entrée de l’application -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyApplication">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
 
         <meta-data
             android:name="preloaded_fonts"
