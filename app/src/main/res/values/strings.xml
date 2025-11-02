@@ -46,4 +46,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_create_acc">createAcc</string>
     <string name="title_activity_creat_acc">creatAcc</string>
+    <string name="default_web_client_id">
+    659831780983-k46ecv580vk9q7i5rf7vi3pjldrav3qu.apps.googleusercontent.com
+    </string>
 </resources>
