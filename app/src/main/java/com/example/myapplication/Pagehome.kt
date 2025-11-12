@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class PageHome : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +26,7 @@ class PageHome : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    HomeScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -38,7 +37,28 @@ class PageHome : ComponentActivity() {
 fun HomeScreen(modifier: Modifier = Modifier) {
     val auth = FirebaseAuth.getInstance()
     val currentUser = auth.currentUser
-    val displayName = currentUser?.displayName ?: currentUser?.email ?: "Utilisateur"
+    val uid = currentUser?.uid
+
+    var username by remember { mutableStateOf("Chargement...") }
+
+    // 🔹 Lire le nom d'utilisateur dans Firebase Database
+    LaunchedEffect(uid) {
+        if (uid != null) {
+            val database = FirebaseDatabase.getInstance().getReference("users").child(uid)
+            database.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val name = snapshot.child("name").value?.toString()
+                    username = name ?: "Utilisateur"
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    username = "Erreur de chargement"
+                }
+            })
+        } else {
+            username = "Utilisateur non connecté"
+        }
+    }
 
     Column(
         modifier = modifier
@@ -48,7 +68,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Welcome, $displayName 👋",
+            text = "Bienvenue, $username 👋",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
@@ -58,7 +78,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Button(onClick = {
             auth.signOut()
         }) {
-            Text(text = "Logout")
+            Text(text = "Se déconnecter")
         }
     }
 }

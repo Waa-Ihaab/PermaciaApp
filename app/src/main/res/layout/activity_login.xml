@@ -53,19 +53,50 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/edittext"
-            android:hint="Email"
+            android:hint="Nom d'utilisateur"
             android:inputType="textEmailAddress"
             android:paddingStart="15dp" />
 
-        <EditText
-            android:id="@+id/passwordField"
+        <!-- Champ mot de passe avec bouton "voir/cacher" -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edittext"
-            android:hint="Mot de passe"
-            android:inputType="textPassword"
-            android:paddingStart="15dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <EditText
+                android:id="@+id/passwordField"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext"
+                android:hint="Mot de passe"
+                android:inputType="textPassword"
+                android:paddingStart="15dp"
+                android:paddingEnd="50dp" />
+
+            <!-- 👁 Bouton pour voir / cacher le mot de passe -->
+            <ImageView
+                android:id="@+id/togglePassword"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_eye_off"
+                android:contentDescription="Afficher ou cacher mot de passe" />
+        </RelativeLayout>
+
+        <!-- 🔁 Lien pour réinitialiser le mot de passe -->
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mot de passe oublié ?"
+            android:textColor="#000000"
+            android:textSize="10sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/poppins_semibold" />
+
 
 
         <Button
