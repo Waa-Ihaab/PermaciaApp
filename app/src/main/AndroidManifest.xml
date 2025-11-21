@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,32 +14,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-
-        <!-- Page d’accueil après connexion -->
         <activity
-            android:name=".PageHome"
+            android:name=".Fvpharmacie"
+            android:exported="false" />
+        <!-- Page Profil -->
+        <activity
+            android:name=".Monprofile"
+            android:exported="false" /> <!-- Page d’accueil après connexion -->
+        <activity
+            android:name=".Pagehome"
             android:exported="true"
-            android:theme="@style/Theme.MyApplication" />
-
-        <!-- Écran de création de compte -->
+            android:theme="@style/Theme.MyApplication" /> <!-- Page création de compte -->
         <activity
             android:name=".Creatacc"
-            android:exported="true" />
-
-        <!-- Page de connexion -->
-        <activity android:name=".Login" />
-
-        <!-- Point d’entrée de l’application -->
+            android:exported="true" /> <!-- Page Login -->
+        <activity
+            android:name=".Login"
+            android:exported="true" /> <!-- Activity principale (point d’entrée) -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyApplication">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
+        </activity> <!-- Fonts préchargées -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

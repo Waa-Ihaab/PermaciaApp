@@ -1,0 +1,62 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:radius="16dp"
+    android:backgroundTint="#FFFFFF"
+    android:elevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Image pharmacie -->
+        <ImageView
+            android:id="@+id/pharmacyImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            android:clipToOutline="true"/>
+
+        <!-- Infos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pharmacyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharmacie Centrale"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/pharmacyAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 Rue Lacépède, 93800 Épinay-sur-Seine"
+                android:textColor="#777777"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <!-- Bouton flèche -->
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/arrow_circle"
+            android:src="@drawable/next"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

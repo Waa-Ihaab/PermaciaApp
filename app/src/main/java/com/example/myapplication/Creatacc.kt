@@ -50,7 +50,7 @@ class Creatacc : AppCompatActivity() {
                     if (loginTask.isSuccessful) {
                         // ✅ Utilisateur déjà enregistré → connexion directe
                         Toast.makeText(this, "Bienvenue à nouveau, ${name} 👋", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, PageHome::class.java))
+                        startActivity(Intent(this, Pagehome::class.java))
                         finish()
                     } else {
                         // 🔹 Si connexion échoue, on essaie de créer le compte
@@ -72,7 +72,7 @@ class Creatacc : AppCompatActivity() {
                                     userRef.setValue(userData)
                                         .addOnSuccessListener {
                                             Toast.makeText(this, "Compte créé avec succès ✅", Toast.LENGTH_SHORT).show()
-                                            startActivity(Intent(this, PageHome::class.java))
+                                            startActivity(Intent(this, Pagehome::class.java))
                                             finish()
                                         }
                                         .addOnFailureListener {
@@ -139,7 +139,7 @@ class Creatacc : AppCompatActivity() {
                     userRef.setValue(userData)
 
                     Toast.makeText(this, "Connexion Google réussie ✅", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, PageHome::class.java))
+                    startActivity(Intent(this, Pagehome::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Erreur : ${task.exception?.message}", Toast.LENGTH_LONG).show()

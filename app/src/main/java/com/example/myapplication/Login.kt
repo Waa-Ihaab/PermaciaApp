@@ -114,7 +114,7 @@ class Login : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Bienvenue ✅", Toast.LENGTH_SHORT).show()
                         Log.d("FIREBASE_LOGIN", "Connexion réussie pour $email")
-                        startActivity(Intent(this, PageHome::class.java))
+                        startActivity(Intent(this, Pagehome::class.java))
                         finish()
                     } else {
                         Toast.makeText(
@@ -175,7 +175,7 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Connexion Google réussie ✅", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, PageHome::class.java))
+                    startActivity(Intent(this, Pagehome::class.java))
                     finish()
                 } else {
                     Toast.makeText(
