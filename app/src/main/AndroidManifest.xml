@@ -15,9 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Fvpharmacie"
+            android:name=".HistorySearch"
             android:exported="false" />
-        <!-- Page Profil -->
+        <activity
+            android:name=".AllPharmacia"
+            android:exported="false" />
+        <activity
+            android:name=".Fvpharmacie"
+            android:exported="false" /> <!-- Page Profil -->
         <activity
             android:name=".Monprofile"
             android:exported="false" /> <!-- Page d’accueil après connexion -->

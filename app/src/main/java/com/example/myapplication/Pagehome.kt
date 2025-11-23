@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.TextView
 
 class Pagehome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +24,29 @@ class Pagehome : AppCompatActivity() {
 
         val btnNext = findViewById<ImageView>(R.id.btnfv)
 
-        // 2. On ajoute le clic pour aller vers Fvpharmacie
+        // go to Fvpharmacie
         btnNext.setOnClickListener {
             val intent = Intent(this, Fvpharmacie::class.java)
             startActivity(intent)
         }
+
+        val btnToutVoir = findViewById<TextView>(R.id.ttvoirBtn)
+
+        // go to all pharmacie
+        btnToutVoir.setOnClickListener {
+            val intent = Intent(this, AllPharmacia::class.java)
+            startActivity(intent)
+        }
+
+        val historyBtn = findViewById<ImageView>(R.id.historyBtn)
+
+        // go to History
+        historyBtn.setOnClickListener {
+            val intent = Intent(this, HistorySearch::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
 
