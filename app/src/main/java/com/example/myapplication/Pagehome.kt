@@ -15,12 +15,20 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+<<<<<<< HEAD
+=======
+import com.example.myapplication.adapter.PharmacieAdapter
+>>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
+<<<<<<< HEAD
 import com.google.firebase.firestore.FirebaseFirestore
 
+=======
+import com.example.myapplication.database.PharmacieRepository
+>>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
 
 class Pagehome : AppCompatActivity() {
 
@@ -31,13 +39,38 @@ class Pagehome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pagehome)
 
+<<<<<<< HEAD
 
         
+=======
+>>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
         // ✅ RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewPharmacies)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+<<<<<<< HEAD
 
+=======
+        // ✅ Base de données
+        val repo = PharmacieRepository(this)
+
+        // Insère seulement si vide
+        if (!repo.hasData()) {
+            repo.insertInitialPharmacies()
+        }
+
+        // Récupérer les pharmacies
+        val pharmacies = repo.getAllPharmacies()
+
+        // Adapter
+        val adapter = PharmacieAdapter(pharmacies)
+        recyclerView.adapter = adapter
+
+        // Debug Log
+        for (pharma in pharmacies) {
+            Log.d("PHARMACIE", "Nom: ${pharma.nom} - Tel: ${pharma.telephone}")
+        }
+>>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
 
         // ✅ GPS
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -63,6 +96,7 @@ class Pagehome : AppCompatActivity() {
         }
 
         // ✅ Nom utilisateur
+<<<<<<< HEAD
         // ✅ Nom utilisateur depuis Firestore
         val textViewUser = findViewById<TextView>(R.id.textView2)
         val user = FirebaseAuth.getInstance().currentUser
@@ -85,6 +119,13 @@ class Pagehome : AppCompatActivity() {
                 }
         }
 
+=======
+        val textViewUser = findViewById<TextView>(R.id.textView2)
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            textViewUser.text = user.displayName ?: "Utilisateur"
+        }
+>>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
     }
 
     override fun onResume() {
