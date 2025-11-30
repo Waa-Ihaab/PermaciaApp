@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2EFED">
+
+    <FrameLayout
+        android:id="@+id/Frame1"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- LOGO -->
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_marginTop="70dp"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo" />
+
+            <!-- TEXTE SOUS LOGO -->
+            <TextView
+                android:id="@+id/welcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Your 24/7 pharmacy companion"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <!-- ILLUSTRATION DES MEDICAMENTS -->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/vitamins" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/Frame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Frame1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp">
+
+        <Button
+            android:id="@+id/btnGetStarted"
+            android:layout_width="331dp"
+            android:layout_height="55dp"
+            android:background="@drawable/btn_corner"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Get Started"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:backgroundTint="@null" />
+    </FrameLayout>
+
+</RelativeLayout>

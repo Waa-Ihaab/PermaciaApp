@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2EFED">
+
+    <!-- Section Top -->
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="23dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/PermaciaLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"/>
+
+        <TextView
+            android:id="@+id/Welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/poppins"
+            android:text="Welcome !"
+            android:textColor="#252525" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/howareyou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins"
+            android:alpha="0.8"
+            android:text="How it going today ?"
+            android:textColor="#252525" />
+    </LinearLayout>
+
+    <!-- Photo de profil -->
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_background"
+        android:clipToOutline="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Section Middle -->
+    <FrameLayout
+        android:id="@+id/middleLayout"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Carte Pharmacies -->
+        <FrameLayout
+            android:layout_width="178dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_radius_5"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- Icône rouge -->
+
+            <!-- Texte -->
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/fvph" />
+
+            <TextView
+                android:id="@+id/myText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Pharmacies\nenregistrer"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <!-- Nombre 03 -->
+            <TextView
+                android:id="@+id/favCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="130dp"
+                android:layout_marginBottom="70dp"
+                android:text="03"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Flèche -->
+            <ImageView
+                android:id="@+id/btnfv"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/arrow_circle"
+                android:padding="6dp"
+                android:src="@drawable/next" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="178dp"
+            android:layout_height="148dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_radius_5"
+            android:clickable="true"
+            android:focusable="true">
+
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/historique" />
+
+            <TextView
+                android:id="@+id/historique"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Historique des recherches"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <ImageView
+                android:id="@+id/historyBtn"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/arrow_circle"
+                android:padding="6dp"
+                android:src="@drawable/next" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+
+
+
+
+    <!-- Section Bottom -->
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/middleLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pharmacies proche"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/ttvoirBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tout voir"
+                android:textSize="14sp"
+                android:textColor="#808080" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPharmacies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            tools:listitem="@layout/item_pharmacy" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
