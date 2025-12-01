@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!-- Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication"> <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-=======
-
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!-- Permissions -->
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- android<13 -->
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
 
     <application
         android:allowBackup="true"
@@ -28,13 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
         <activity
-<<<<<<< HEAD
             android:name=".PharmacyPage"
             android:exported="false" />
         <activity
-=======
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
             android:name=".HistorySearch"
             android:exported="false" />
         <activity
@@ -42,33 +27,36 @@
             android:exported="false" />
         <activity
             android:name=".Fvpharmacie"
-            android:exported="false" /> <!-- Page Profil -->
+            android:exported="false" />
         <activity
             android:name=".Monprofile"
-            android:exported="false" /> <!-- Page d’accueil après connexion -->
+            android:exported="false" />
+
         <activity
             android:name=".Pagehome"
             android:exported="true"
-            android:theme="@style/Theme.MyApplication" /> <!-- Page création de compte -->
+            android:theme="@style/Theme.MyApplication" />
         <activity
             android:name=".Creatacc"
-            android:exported="true" /> <!-- Page Login -->
+            android:exported="true" />
         <activity
             android:name=".Login"
-            android:exported="true" /> <!-- Activity principale (point d’entrée) -->
+            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyApplication">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Fonts préchargées -->
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

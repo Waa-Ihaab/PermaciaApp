@@ -7,5 +7,7 @@ data class Pharmacie(
     val codePostal: String,
     val ville: String,
     val telephone: String,
-    val distance: Double
+    val latitude: Double,
+    val longitude: Double,
+    val type: String
 )

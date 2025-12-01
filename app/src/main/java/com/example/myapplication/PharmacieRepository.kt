@@ -3,6 +3,7 @@ package com.example.myapplication.database
 import android.content.ContentValues
 import android.content.Context
 import com.example.myapplication.model.Pharmacie
+import com.google.gson.Gson
 
 class PharmacieRepository(context: Context) {
 
@@ -18,7 +19,9 @@ class PharmacieRepository(context: Context) {
             put("codePostal", pharmacie.codePostal)
             put("ville", pharmacie.ville)
             put("telephone", pharmacie.telephone)
-            put("distance", pharmacie.distance)
+            put("latitude", pharmacie.latitude)
+            put("longitude", pharmacie.longitude)
+            put("type", pharmacie.type)
         }
 
         db.insert("pharmacie", null, values)
@@ -33,13 +36,15 @@ class PharmacieRepository(context: Context) {
 
         while (cursor.moveToNext()) {
             val pharmacie = Pharmacie(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4),
-                cursor.getString(5),
-                cursor.getDouble(6)
+                cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                cursor.getString(cursor.getColumnIndexOrThrow("nom")),
+                cursor.getString(cursor.getColumnIndexOrThrow("adresse")),
+                cursor.getString(cursor.getColumnIndexOrThrow("codePostal")),
+                cursor.getString(cursor.getColumnIndexOrThrow("ville")),
+                cursor.getString(cursor.getColumnIndexOrThrow("telephone")),
+                cursor.getDouble(cursor.getColumnIndexOrThrow("latitude")),
+                cursor.getDouble(cursor.getColumnIndexOrThrow("longitude")),
+                cursor.getString(cursor.getColumnIndexOrThrow("type"))
             )
             list.add(pharmacie)
         }
@@ -49,16 +54,15 @@ class PharmacieRepository(context: Context) {
         return list
     }
 
-    fun insertInitialPharmacies() {
-        val liste = listOf(
-            Pharmacie(1, "Pharmacie Centrale", "12 rue de Paris", "93800", "Épinay-sur-Seine", "0148123456", 0.0),
-            Pharmacie(2, "Pharmacie du Centre", "5 avenue de la République", "93800", "Épinay-sur-Seine", "0148567890", 0.0),
-            Pharmacie(3, "Pharmacie des Arcades", "32 boulevard Foch", "93800", "Épinay-sur-Seine", "0148129988", 0.0)
-        )
+    fun loadFromJson(context: Context) {
+        val json = context.assets.open("pharmacies.json")
+            .bufferedReader()
+            .use { it.readText() }
 
-        for (pharma in liste) {
-            insertPharmacie(pharma)
-        }
+        val gson = Gson()
+        val pharmacies = gson.fromJson(json, Array<Pharmacie>::class.java)
+
+        pharmacies.forEach { insertPharmacie(it) }
     }
 
     fun hasData(): Boolean {

@@ -17,7 +17,9 @@ class PharmacieDatabaseHelper(context: Context) :
                 codePostal TEXT,
                 ville TEXT,
                 telephone TEXT,
-                distance REAL
+                latitude REAL,
+                longitude REAL,
+                type TEXT
             )
         """.trimIndent()
 

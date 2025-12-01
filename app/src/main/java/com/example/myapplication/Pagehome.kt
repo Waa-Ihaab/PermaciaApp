@@ -15,117 +15,48 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-<<<<<<< HEAD
-=======
 import com.example.myapplication.adapter.PharmacieAdapter
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
+import com.example.myapplication.database.PharmacieRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
-<<<<<<< HEAD
 import com.google.firebase.firestore.FirebaseFirestore
-
-=======
-import com.example.myapplication.database.PharmacieRepository
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
+import com.google.firebase.storage.FirebaseStorage
+import kotlin.math.*
 
 class Pagehome : AppCompatActivity() {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_CODE = 1001
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var repo: PharmacieRepository
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pagehome)
 
-<<<<<<< HEAD
-
-        
-=======
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
-        // ✅ RecyclerView
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewPharmacies)
+        // RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewPharmacies)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-<<<<<<< HEAD
+        // Base de données SQLite
+        repo = PharmacieRepository(this)
 
-=======
-        // ✅ Base de données
-        val repo = PharmacieRepository(this)
-
-        // Insère seulement si vide
+        // Charger JSON une seule fois
         if (!repo.hasData()) {
-            repo.insertInitialPharmacies()
+            repo.loadFromJson(this)
         }
 
-        // Récupérer les pharmacies
-        val pharmacies = repo.getAllPharmacies()
-
-        // Adapter
-        val adapter = PharmacieAdapter(pharmacies)
-        recyclerView.adapter = adapter
-
-        // Debug Log
-        for (pharma in pharmacies) {
-            Log.d("PHARMACIE", "Nom: ${pharma.nom} - Tel: ${pharma.telephone}")
-        }
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
-
-        // ✅ GPS
+        // GPS pour afficher les pharmacies proches
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         checkLocationPermission()
 
-        // ✅ Photo Profil
-        val profileImage = findViewById<ImageView>(R.id.profileImage)
-        profileImage.setOnClickListener {
-            startActivity(Intent(this, Monprofile::class.java))
-        }
+        // Navigation
+        setupNavigation()
 
-        // ✅ Boutons navigation
-        findViewById<ImageView>(R.id.btnfv).setOnClickListener {
-            startActivity(Intent(this, Fvpharmacie::class.java))
-        }
-
-        findViewById<TextView>(R.id.ttvoirBtn).setOnClickListener {
-            startActivity(Intent(this, AllPharmacia::class.java))
-        }
-
-        findViewById<ImageView>(R.id.historyBtn).setOnClickListener {
-            startActivity(Intent(this, HistorySearch::class.java))
-        }
-
-        // ✅ Nom utilisateur
-<<<<<<< HEAD
-        // ✅ Nom utilisateur depuis Firestore
-        val textViewUser = findViewById<TextView>(R.id.textView2)
-        val user = FirebaseAuth.getInstance().currentUser
-        val db = FirebaseFirestore.getInstance()
-
-        if (user != null) {
-            db.collection("users")
-                .document(user.uid)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val name = document.getString("name") ?: "Utilisateur"
-                        textViewUser.text = name
-                    } else {
-                        textViewUser.text = "Utilisateur"
-                    }
-                }
-                .addOnFailureListener {
-                    textViewUser.text = "Utilisateur"
-                }
-        }
-
-=======
-        val textViewUser = findViewById<TextView>(R.id.textView2)
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            textViewUser.text = user.displayName ?: "Utilisateur"
-        }
->>>>>>> 2eaf410c69055c7c11e1dd6d123b3701ff9442b4
+        // Affichage nom utilisateur
+        loadUserName()
     }
 
     override fun onResume() {
@@ -133,14 +64,29 @@ class Pagehome : AppCompatActivity() {
         loadProfileImage()
     }
 
+    // ------------------------- LOAD USER NAME -------------------------
+    private fun loadUserName() {
+        val textViewUser = findViewById<TextView>(R.id.textView2)
+        val user = FirebaseAuth.getInstance().currentUser ?: return
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("users").document(user.uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                textViewUser.text = doc.getString("name") ?: "Utilisateur"
+            }
+            .addOnFailureListener {
+                textViewUser.text = "Utilisateur"
+            }
+    }
+
+    // ------------------------- PROFILE IMAGE -------------------------
     private fun loadProfileImage() {
         val profileImage = findViewById<ImageView>(R.id.profileImage)
         val user = FirebaseAuth.getInstance().currentUser ?: return
-        val uid = user.uid
 
         val storageRef = FirebaseStorage.getInstance()
-            .reference
-            .child("profileImages/$uid/profile.jpg")
+            .reference.child("profileImages/${user.uid}/profile.jpg")
 
         storageRef.downloadUrl
             .addOnSuccessListener { uri ->
@@ -151,15 +97,13 @@ class Pagehome : AppCompatActivity() {
             }
             .addOnFailureListener {
                 profileImage.setImageResource(R.drawable.default_avatar)
-                Log.e("PROFILE", "Image de profil introuvable")
             }
     }
 
-    // ✅ Permissions GPS
+    // ------------------------- PERMISSIONS -------------------------
     private fun checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                this, Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
@@ -172,35 +116,90 @@ class Pagehome : AppCompatActivity() {
         }
     }
 
+    // ------------------------- GET USER LOCATION -------------------------
     private fun getUserLocation() {
         if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                this, Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) return
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            if (location != null) {
-                Log.d("GPS", "Latitude: ${location.latitude}, Longitude: ${location.longitude}")
-            } else {
-                Toast.makeText(this, "Position non trouvée", Toast.LENGTH_SHORT).show()
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                if (location == null) {
+                    Toast.makeText(this, "Position non trouvée", Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                loadNearestPharmacies(location)
             }
+    }
+
+    // ------------------------- SORT BY DISTANCE -------------------------
+    private fun loadNearestPharmacies(location: Location) {
+        val allPharmacies = repo.getAllPharmacies()
+
+        val pharmaciesSorted = allPharmacies.map {
+            it to distance(
+                location.latitude,
+                location.longitude,
+                it.latitude,
+                it.longitude
+            )
+        }.sortedBy { it.second }
+
+        // Prendre 10 pharmacies les plus proches
+        val nearest = pharmaciesSorted.take(10).map { it.first }
+
+        recyclerView.adapter = PharmacieAdapter(nearest)
+
+        Log.d("PHARMA", "Pharmacies proches affichées : ${nearest.size}")
+    }
+
+    // ------------------------- HAVERSINE -------------------------
+    private fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val R = 6371
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+
+        val a = sin(dLat / 2).pow(2) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2).pow(2)
+
+        val c = 2 * asin(sqrt(a))
+        return R * c
+    }
+
+    // ------------------------- NAVIGATION -------------------------
+    private fun setupNavigation() {
+        findViewById<ImageView>(R.id.profileImage).setOnClickListener {
+            startActivity(Intent(this, Monprofile::class.java))
+        }
+
+        findViewById<ImageView>(R.id.btnfv).setOnClickListener {
+            startActivity(Intent(this, Fvpharmacie::class.java))
+        }
+
+        findViewById<TextView>(R.id.ttvoirBtn).setOnClickListener {
+            startActivity(Intent(this, AllPharmacia::class.java))
+        }
+
+        findViewById<ImageView>(R.id.historyBtn).setOnClickListener {
+            startActivity(Intent(this, HistorySearch::class.java))
         }
     }
 
+    // ------------------------- PERMISSION RESULT -------------------------
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (requestCode == LOCATION_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getUserLocation()
-            } else {
-                Toast.makeText(this, "Permission GPS refusée", Toast.LENGTH_SHORT).show()
-            }
+        if (requestCode == LOCATION_PERMISSION_CODE &&
+            grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            getUserLocation()
+        } else {
+            Toast.makeText(this, "Permission GPS refusée", Toast.LENGTH_SHORT).show()
         }
     }
 }
