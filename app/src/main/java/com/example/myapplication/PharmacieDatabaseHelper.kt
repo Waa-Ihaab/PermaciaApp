@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class PharmacieDatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "pharmacie_db", null, 1) {
+    SQLiteOpenHelper(context, "pharmacie_db", null, 2) {
 
     override fun onCreate(db: SQLiteDatabase) {
 
